@@ -7,6 +7,9 @@ import { ListComponent } from './list/list.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
+import { TaskService } from './task.service';
+import { ListService } from './list/list.service';
+
 const appRoutes: Routes = [
   { path: 'list/:id', component: ListComponent },
   { path: '', component: HomeComponent },
@@ -27,7 +30,7 @@ const appRoutes: Routes = [
     ),
     BrowserModule
   ],
-  providers: [],
+  providers: [TaskService, ListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
