@@ -11,6 +11,10 @@ export class ListService {
 
   constructor() { }
 
+  getList(listId): List {
+    return LISTS.filter(list => list.id === listId)[0];
+  }
+
   getLists(): Observable<List[]> {
     return of(LISTS);
   }

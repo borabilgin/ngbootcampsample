@@ -1,7 +1,7 @@
-<h3>Lists</h3>
+<h3>{{list.name}}</h3>
 <div class="list-group">
-  <a *ngFor="let list of lists" href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-    {{list.name}}
+  <a *ngFor="let task of list.items" href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+    {{task.task}}
     <span class="badge badge-primary badge-pill">{{list.items.length}}</span>
   </a>
   <a href="#" class="list-group-item d-flex justify-content-between align-items-center">

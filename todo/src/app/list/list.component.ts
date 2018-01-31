@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ListService } from './list.service';
 import { List } from './list';
 
@@ -8,18 +8,24 @@ import { List } from './list';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
+  @Input() listId: number;
 
-  lists: List[];
+  list: List;
 
   constructor(private listService: ListService) { }
 
   ngOnInit() {
-    this.getLists();
+    console.log(this.getList(this.listId));
   }
 
-  getLists(): void {
-    this.listService.getLists()
-      .subscribe(lists => this.lists = lists);
+  getList(listId): void {
+    this.list = this.listService.getList(this.listId);
+    console.log(this.list);
   }
+
+  // getLists(): void {
+  //   this.listService.getLists()
+  //     .subscribe(lists => this.list = lists);
+  // }
 
 }
