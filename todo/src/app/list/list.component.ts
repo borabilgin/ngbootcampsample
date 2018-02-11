@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ListService } from './list.service';
-import { List } from './list';
+import { List } from '../list';
+import { CreateNewDialogComponent } from './create-new-dialog.component';
+
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-list',
@@ -8,24 +11,33 @@ import { List } from './list';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  @Input() listId: number;
+  @Input() list: List;
 
-  list: List;
+  createNewDialogRef: MatDialogRef<CreateNewDialogComponent>;
 
-  constructor(private listService: ListService) { }
+  constructor(private listService: ListService, private dialog: MatDialog) { }
+  lists: List[];
+  tasks: any[];
 
   ngOnInit() {
-    console.log(this.getList(this.listId));
   }
 
-  getList(listId): void {
-    this.list = this.listService.getList(this.listId);
-    console.log(this.list);
+  toggle(task) {
+    this.listService.toggleTask(task);
+    task.complete = !task.complete;
   }
 
-  // getLists(): void {
-  //   this.listService.getLists()
-  //     .subscribe(lists => this.list = lists);
+  // getList(listId): void {
+  //   this.list = this.listService.getList(this.listId);
   // }
 
+  addNew(): void {
+    this.createNewDialogRef = this.dialog.open(CreateNewDialogComponent, {
+      width: '250px',
+      data: { name: 'list' }
+    });
+
+    this.createNewDialogRef.afterClosed().subscribe(result => {
+    });
+  }
 }

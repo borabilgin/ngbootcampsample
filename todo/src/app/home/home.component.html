@@ -1,10 +1,23 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <app-list [listId]="0"></app-list>
+
+      <h3>All Lists</h3>
+      <div class="list-group">
+        <a *ngFor="let item of lists" href="list/{{item.id}}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          {{item.name}}
+          <span class="badge badge-primary badge-pill">{{item.numTasks}}</span>
+        </a>
+        <a href="#" (click)="addNew()" class="list-group-item d-flex justify-content-between align-items-center">
+          Add New
+          <button class="btn btn-success">+</button>
+        </a>
+      </div>
     </div>
+    
     <div class="col">
-      <app-list [listId]="1"></app-list>
+      <h3>Tasks</h3>
+      <app-list [list]="tasks"></app-list>
     </div>
   </div>
 </div>
